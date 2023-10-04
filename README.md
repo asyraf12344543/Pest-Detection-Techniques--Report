@@ -17,8 +17,11 @@ A.	Technique: Cropping
 Cropping is the process of removing unnecessary exterior parts from an image. Many of the images above included black pixels, which you can simply remove by cropping. Images in OpenCV are essentially Numpy arrays. As a result, we can use Numpy array slicing to crop an image and delete the parts we don't want. The first dimension of a Numpy array represents the array's rows (which are the image's height or y-coordinates), while the second dimension represents the array's columns (which is the width of the image or the x-coordinates). First, we'll read the "pest.jpg" input image and convert it from BGR to RGB so that we can plot it using matplotlib. Then we deactivate the x and y axes, resulting in 1700 pixels on the x-axis and 2390 pixels on the y-axis, which we save as "pest cropped.jpg" in the same directory as the input file.
 
 B.	Technique: Foreground Subtraction
-In our application, we applied the GrabCut Foreground Detection algorithm to remove the background of the input image and detect the subject of that image. Carsten Rother, Vladimir Kolmogorov, and Andrew Blake of Microsoft Research Cambridge, UK, developed the GrabCut method in their article "GrabCut": interactive foreground extraction with iterated graph cuts. GrabCut was created as a consequence of the necessity for a foreground algorithm that required minimum user intervention. The GrabCut algorithm works by accepting an input image with either a bounding box that specified the location of the object in the image we wanted to segment or a mask that approximated the segmentation Iteratively performing the following steps:
-●	Estimating the color distribution of the foreground and background via a Gaussian Mixture Model (GMM)
-●	Constructing a Markov random field over the pixels labels (i.e., foreground vs. background)
-●	Applying a graph cut optimization to arrive at the final segmentation
+In our application, we applied the GrabCut Foreground Detection algorithm to remove the background of the input image and detect the subject of that image. Carsten Rother, Vladimir Kolmogorov, and Andrew Blake of Microsoft Research Cambridge, UK, developed the GrabCut method in their article "GrabCut": interactive foreground extraction with iterated graph cuts. GrabCut was created as a consequence of the necessity for a foreground algorithm that required minimum user intervention. 
+
+The GrabCut algorithm works by accepting an input image with either a bounding box that specified the location of the object in the image we wanted to segment or a mask that approximated the segmentation iteratively performing the following steps:
+1.	Estimating the color distribution of the foreground and background via a Gaussian Mixture Model (GMM)
+2.	Constructing a Markov random field over the pixels labels (i.e., foreground vs. background)
+3.	Applying a graph cut optimization to arrive at the final segmentation
+
 OpenCV has an implementation of GrabCut via the cv2.grabCut function that makes applying GrabCut a breeze (once you know the parameters to the function and how to tweak them, of course). 
